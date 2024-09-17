@@ -1,4 +1,5 @@
 ﻿namespace MauiChat;
+
 #if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 #endif
@@ -19,18 +20,14 @@ public static class MauiProgram
 			})
 			.ConfigureMauiHandlers(d => 
 			{
-                //Remove bottom line and border from Editor
+                // Remove bottom line and border from Editor
                 Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping(nameof(Editor), (handler, view) =>
                 {
-                    if (view is not Editor)
-                    {
-                        return;
-                    }
+                    if (view is not Editor) { return; }
 
 #if ANDROID
                     handler.PlatformView.SetPadding(11, 30, 11, 30);
-                    handler.PlatformView.BackgroundTintList
-                        = Android.Content.Res.ColorStateList.ValueOf(view.Background.ToColor()?.ToAndroid() ?? Android.Graphics.Color.Transparent);
+                    handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(view.Background.ToColor()?.ToAndroid() ?? Android.Graphics.Color.Transparent);
 
                     if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
                     {
